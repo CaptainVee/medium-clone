@@ -1,5 +1,5 @@
 
-from .base import * 
+from .base import *  # noqa
 from .base import env
 
 DEBUG = True
@@ -10,3 +10,5 @@ SECRET_KEY = env(
 )
 
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+
+CSRF_TRUSTED_TOKEN = ['http://localhost:8080']

@@ -1,2 +1,4 @@
-from .base import * 
-from .base import env
+from .base import * # noqa
+# from .base import env
+
+CSRF_TRUSTED_TOKEN = ['']
