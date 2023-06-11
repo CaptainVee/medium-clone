@@ -1,4 +1,3 @@
-
 from .base import *  # noqa
 from .base import env
 
@@ -11,4 +10,11 @@ SECRET_KEY = env(
 
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
-CSRF_TRUSTED_TOKEN = ['http://localhost:8080']
+CSRF_TRUSTED_TOKEN = ["http://localhost:8080"]
+
+EMAIL_BACKENDS = "djcelery_email.backends.CeleryEmailBackend"
+EMAIL_HOST = env("EMAIL_HOST", default="mailhog")
+EMAIL_PORT = env("EMAIL_PORT")
+DEFAULT_FROM_EMAIL = "support@captainvee.site"
+DOMAIN = env("DOMAIN")
+SITE_NAME = "Medium"

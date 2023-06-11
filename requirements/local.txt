@@ -4,3 +4,4 @@ psycopg2==2.9.5
 flake8==6.0.0
 black==22.10.0 
 isort==5.10.1
+watchfiles==0.18.1
