@@ -15,9 +15,9 @@ schema_view = get_schema_view(
         description="API endpoints for Medium clone",
         contact=openapi.Contact(email="captainvee3@gmail.com"),
         license=openapi.License(name="MIT License"),
-        public=True,
-        permission_classes=(permissions.AllowAny,),
-    )
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
@@ -25,9 +25,9 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path("api/v1/auth/user/", CustomUserDetailsView.as_view(), name="user_details"),
     path("api/v1/auth/", include("dj_rest_auth.urls")),
-    path("api/v1/auth/registration", include("dj_rest_auth.registration.urls")),
+    path("api/v1/auth/registration/", include("dj_rest_auth.registration.urls")),
     path(
-        "api/v1/auth/password/reset/confirm/<uidb64>/<token>",
+        "api/v1/auth/password/reset/confirm/<uidb64>/<token>/",
         PasswordResetConfirmView.as_view(),
         name="password_reset_confirm",
     ),
