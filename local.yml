@@ -18,7 +18,7 @@ services:
       - postgres
       - mailhog
       - redis
-    commands: /start
+    command: /start
     networks:
       - medium-api
 
@@ -53,8 +53,8 @@ services:
       dockerfile: ./docker/local/django/Dockerfile
     command: /start-celeryworker
     volumes:
-      - .:app
-    env_files:
+      - .:/app
+    env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     depends_on:
@@ -71,7 +71,7 @@ services:
     command: /start-flower
     volumes:
       - flower_data:/data
-    env_files:
+    env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     ports:
@@ -88,9 +88,9 @@ services:
       - api
     volumes:
       - static_volume:/app/staticfiles
-      - media_volumes:/app/mediafiles
+      - media_volume:/app/mediafiles
     build:
-      contex: ./docker/local/nginx
+      context: ./docker/local/nginx
       dockerfile: Dockerfile
     ports:
       - "8080:80"

@@ -3,7 +3,7 @@ ARG PYTHON_VERSION=3.11.2-bullseye
 FROM python:${PYTHON_VERSION} as python
 
 FROM python as python-build-stage
-ARG BUILD_ENVIRONMENT = local
+ARG BUILD_ENVIRONMENT=local
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
@@ -17,7 +17,7 @@ RUN pip wheel --wheel-dir /usr/src/app/wheels \
 FROM python as python-run-stage
 ARG BUILD_ENVIRONMENT=local
 
-ARG APP_HOME = /app
+ARG APP_HOME=/app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -28,7 +28,7 @@ WORKDIR ${APP_HOME}
 RUN apt-get update && apt-get install --no-install-recommends -y \
     libpq-dev \
     gettext \
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=python-build-stage /usr/src/app/wheels /wheels/

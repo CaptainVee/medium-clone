@@ -1,4 +1,3 @@
-
 from pathlib import Path
 from datetime import timedelta
 import environ
@@ -24,7 +23,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.sites",
     "django.contrib.messages",
-    "django.contrib.staticfiles"
+    "django.contrib.staticfiles",
 ]
 
 THIRD_PARTY_APPS = [
@@ -40,10 +39,14 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth",
-    "dj_rest_auth.registeration",
+    "dj_rest_auth.registration",
 ]
 
-LOCAL_APPS = ["core_apps.users.UsersConfig", "core_apps.common.CommonConfig", "core_apps.profiles.ProfilesConfig"]
+LOCAL_APPS = [
+    "core_apps.users.apps.UsersConfig",
+    "core_apps.common.apps.CommonConfig",
+    "core_apps.profiles.apps.ProfilesConfig",
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -86,7 +89,7 @@ WSGI_APPLICATION = "medium_clone.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {"default": env.db('DATABASE_URL')}
+DATABASES = {"default": env.db("DATABASE_URL")}
 
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
@@ -122,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Africa/Nigeria"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -130,7 +133,7 @@ USE_TZ = True
 
 SITE_ID = 1
 
-ADMIN_URL = 'admin/'
+ADMIN_URL = "admin/"
 
 ADMINS = [("""Captain Vee""", "api.captainvee@gmail.com")]
 
@@ -157,13 +160,13 @@ MEDIA_ROOT = str(ROOT_DIR / "media")
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/mediafiles/"
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = "users.User"
 
 CELERY_BROKER_URL = env("CELERY_BROKER")
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
 CELERY_RESULT_BACKEND_MAX_RETRIES = 10
 CELERY_TASK_SEND_SENT_EVENT = True
 
@@ -213,16 +216,13 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "AUTH_HEADER_TYPES": (
-        "Bearer",
-    ),
+    "AUTH_HEADER_TYPES": ("Bearer",),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": True,
     "SIGNING_KEY": env("SIGNING_KEY"),
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
-
 }
 
 REST_AUTH = {
@@ -240,9 +240,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Allauth setup
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None

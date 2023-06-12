@@ -6,11 +6,19 @@ from .models import User
 
 
 class UserAdmin(BaseUserAdmin):
-    odering = ["email"]
+    ordering = ["email"]
     form = UserChangeForm
     add_form = UserCreationForm
     model = User
-    list_display = "__all__"
+    list_display = [
+        "pkid",
+        "id",
+        "email",
+        "first_name",
+        "last_name",
+        "is_staff",
+        "is_active",
+    ]
     list_display_links = ["pkid", "id", "email"]
     list_filter = ["email", "is_staff", "is_active"]
     fieldsets = (

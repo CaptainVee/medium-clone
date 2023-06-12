@@ -28,7 +28,7 @@ class Profile(TimeStampedModel):
         verbose_name=_("about me"), default="say something about yourself"
     )
     gender = models.CharField(
-        verbose_name=_("gender"), choices=Gender.choices, blank=True
+        verbose_name=_("gender"), choices=Gender.choices, blank=True, max_length=20
     )
     country = CountryField(
         verbose_name=_("country"), default="NG", null=False, blank=False
@@ -51,9 +51,9 @@ class Profile(TimeStampedModel):
 
     def follow(self, profile):
         self.followers.add(profile)
-    
+
     def unfollow(self, profile):
         self.followers.remove(profile)
-    
+
     def check_following(self, profile):
         return self.followers.filter(pkid=profile.pkid).exists()
