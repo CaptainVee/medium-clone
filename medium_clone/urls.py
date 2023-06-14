@@ -31,6 +31,8 @@ urlpatterns = [
         PasswordResetConfirmView.as_view(),
         name="password_reset_confirm",
     ),
+    path("api/v1/profile", include("core_apps.profiles.urls")),
+    
 ]
 
 admin.site.site_header = "Medium Clone API Admin"
