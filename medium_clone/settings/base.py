@@ -40,12 +40,15 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "dj_rest_auth",
     "dj_rest_auth.registration",
+    "taggit",
 ]
 
 LOCAL_APPS = [
     "core_apps.users.apps.UsersConfig",
     "core_apps.common.apps.CommonConfig",
     "core_apps.profiles.apps.ProfilesConfig",
+    "core_apps.articles.apps.ArticlesConfig",
+    "core_apps.ratings.apps.RatingsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
