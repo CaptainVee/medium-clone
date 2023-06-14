@@ -28,7 +28,7 @@ class ProfileListView(generics.ListAPIView):
 class ProfileDetailView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
-    renderer_classes = ProfileJSONRenderer
+    renderer_classes = (ProfileJSONRenderer,)
 
     def get_queryset(self):
         queryset = Profile.objects.select_related("user")
@@ -44,7 +44,7 @@ class UpdateProfileView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UpdateProfileSerializer
     parser_classes = [MultiPartParser]
-    renderer_classes = ProfileJSONRenderer
+    renderer_classes = (ProfileJSONRenderer,)
 
     def get_object(self):
         profile = self.request.user.profile
@@ -115,8 +115,7 @@ class FollowView(APIView):
             user_profile.follow(profile)
             send_mail(
                 subject="A new user follows you",
-                message=f"""Hi there, {profile.user.get_short_name}!!, the user {user_profile.user.get_full_name}
-                            now follows you""",
+                message=f"Hi {profile.user.get_short_name}!!, the user {user_profile.user.get_full_name} follows you",
                 from_email=DEFAULT_FROM_EMAIL,
                 recipient_list=[profile.user.email],
                 fail_silently=True,
