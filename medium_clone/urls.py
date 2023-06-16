@@ -33,7 +33,6 @@ urlpatterns = [
     ),
     path("api/v1/profile/", include("core_apps.profiles.urls")),
     path("api/v1/articles/", include("core_apps.articles.urls")),
-    
 ]
 
 admin.site.site_header = "Medium Clone API Admin"

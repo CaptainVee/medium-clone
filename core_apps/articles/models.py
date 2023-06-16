@@ -25,7 +25,7 @@ class Article(TimeStampedModel):
         return f"{self.author.first_name}'s articles"
 
     @property
-    def estimted_reading_time(self):
+    def estimated_reading_time(self):
         return ArticleReadTimeEngine.estimated_reading_time(self)
 
     def view_count(self):
