@@ -26,5 +26,3 @@ class ClapAdmin(admin.ModelAdmin):
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleView, ArticleViewAdmin)
 admin.site.register(Clap, ClapAdmin)
-
-
