@@ -19,6 +19,9 @@ class Article(TimeStampedModel):
     banner_image = models.ImageField(
         verbose_name=_("Banner Image"), default="/profile_default.png"
     )
+    claps = models.ManyToManyField(
+        User, through="Clap", related_name="clapped_articles"
+    )
     tags = TaggableManager()
 
     def __str__(self):
@@ -66,3 +69,15 @@ class ArticleView(TimeStampedModel):
             article=article, user=user, viewer_ip=viewer_ip
         )
         view.save()
+
+
+class Clap(TimeStampedModel):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ["article", "user"]
+        ordering = ["-created_at"]
+
+    def __str__(self) -> str:
+        return f"{self.user.get_short_name} clapped {self.article.title}"

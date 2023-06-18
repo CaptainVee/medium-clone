@@ -1,13 +1,15 @@
 import logging
 from django.http import Http404
 from rest_framework import generics, status, filters
+from rest_framework.exceptions import ValidationError
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
-from .models import Article, ArticleView
+from .models import Article, ArticleView, Clap
 from .pagination import ArticlePagination
 from .renderers import ArticleJSONRenderer, ArticlesJSONRenderer
-from .serializers import ArticleSerializer
+from .serializers import ArticleSerializer, ClapSerializer
 from .filters import ArticleFilter
 from .permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
@@ -69,3 +71,44 @@ class ArticleRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         )
 
         return Response(serializer.data)
+
+
+class ClapArticleView(generics.CreateAPIView, generics.DestroyAPIView):
+    queryset = Clap.objects.all()
+    serializer_class = ClapSerializer
+
+    def create(self, request, *args, **kwargs):
+        user = request.user
+        article_id = self.kwargs.get("article_id")
+
+        if article_id:
+            try:
+                article = Article.objects.get(id=article_id)
+            except Article.DoesNotExist:
+                raise ValidationError(
+                    "An Article with the article id provided does not exist"
+                )
+        else:
+            raise ValidationError("Article id is required")
+
+        if Clap.objects.filter(user=user, article=article).exists():
+            return Response(
+                {"detail": "You have already clapped on this article"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        clap = Clap.objects.create(user=user, article=article)
+        clap.save()
+        return Response(
+            {"detail": "Clapped added to article"}, status=status.HTTP_201_CREATED
+        )
+
+    def delete(self, request, *args, **kwargs):
+        user = request.user
+        article_id = self.kwargs.get("article_id")
+        article = get_object_or_404(Article, id=article_id)
+        clap = get_object_or_404(Clap, user=user, article=article)
+        clap.delete()
+        return Response(
+            {"detail": "Clap removed from article"}, status=status.HTTP_204_NO_CONTENT
+        )
