@@ -49,6 +49,7 @@ LOCAL_APPS = [
     "core_apps.profiles.apps.ProfilesConfig",
     "core_apps.articles.apps.ArticlesConfig",
     "core_apps.ratings.apps.RatingsConfig",
+    "core_apps.bookmarks.apps.BookmarksConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
