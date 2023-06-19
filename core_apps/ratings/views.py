@@ -1,11 +1,13 @@
 from django.db import IntegrityError
+from rest_framework.exceptions import ValidationError
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
+
+from core_apps.articles.models import Article
 from core_apps.ratings.exceptions import YouHaveAlreadyRated
+
 from .models import Rating
 from .serializers import RatingSerializer
-from core_apps.articles.models import Article
-from rest_framework.exceptions import ValidationError
 
 
 class RatingCreateView(CreateAPIView):

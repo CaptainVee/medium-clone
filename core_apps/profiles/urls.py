@@ -1,13 +1,13 @@
 from django.urls import path
+
 from .views import (
+    FollowerListView,
+    FollowView,
     ProfileDetailView,
     ProfileListView,
     UnFollowView,
     UpdateProfileView,
-    FollowView,
-    FollowerListView,
 )
-
 
 urlpatterns = [
     path("all/", ProfileListView.as_view(), name="all-profiles"),

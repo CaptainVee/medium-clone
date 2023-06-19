@@ -23,7 +23,9 @@ class CustomUserManager(BaseUserManager):
         else:
             raise ValueError(_("You must provide a valid email address."))
 
-        user = self.model(first_name=first_name, last_name=last_name, email=email, **extra_fields)
+        user = self.model(
+            first_name=first_name, last_name=last_name, email=email, **extra_fields
+        )
         user.set_password(password)
 
         extra_fields.setdefault("is_staff", False)

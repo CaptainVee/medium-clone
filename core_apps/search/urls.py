@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import ArticleElasticSearchView
 
+from .views import ArticleElasticSearchView
 
 urlpatterns = [
     path(

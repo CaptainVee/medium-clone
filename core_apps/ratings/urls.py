@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import RatingCreateView
 
+from .views import RatingCreateView
 
 urlpatterns = [
     path(

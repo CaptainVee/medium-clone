@@ -9,7 +9,9 @@ class ArticleReadTimeEngine:
         return len(words)
 
     @staticmethod
-    def estimated_reading_time(article, words_per_minute=250, seconds_per_image=10, seconds_per_tag=2):
+    def estimated_reading_time(
+        article, words_per_minute=250, seconds_per_image=10, seconds_per_tag=2
+    ):
         word_count_body = ArticleReadTimeEngine.word_count(article.body)
         word_count_title = ArticleReadTimeEngine.word_count(article.title)
         word_count_description = ArticleReadTimeEngine.word_count(article.description)

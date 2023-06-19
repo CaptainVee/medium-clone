@@ -20,9 +20,9 @@ class UserCreationForm(admin_form.UserCreationForm):
     }
 
     def clean_email(self):
-        email = self.cleaned_data['email']
+        email = self.cleaned_data["email"]
         try:
             User.objects.get(email=email)
         except User.DoesNotExist:
             return email
-        raise forms.ValidationError(self.error_messages['duplicate_email'])
+        raise forms.ValidationError(self.error_messages["duplicate_email"])

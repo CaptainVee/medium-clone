@@ -1,4 +1,5 @@
 import json
+
 from rest_framework.renderers import JSONRenderer
 
 
@@ -30,4 +31,3 @@ class ArticlesJSONRenderer(JSONRenderer):
             return super(ArticlesJSONRenderer, self).render(data)
 
         return json.dumps({"status_code": status_code, "articles": data})
-

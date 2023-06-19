@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import ResponseListCreateView, ResponseUpdateDeleteView
 
+from .views import ResponseListCreateView, ResponseUpdateDeleteView
 
 urlpatterns = [
     path(

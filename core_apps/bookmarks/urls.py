@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import BookmarkCreateView, BookmarkDestroyView
 
+from .views import BookmarkCreateView, BookmarkDestroyView
 
 urlpatterns = [
     path(
