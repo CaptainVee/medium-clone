@@ -41,6 +41,8 @@ THIRD_PARTY_APPS = [
     "dj_rest_auth",
     "dj_rest_auth.registration",
     "taggit",
+    "django_elasticsearch_dsl",
+    "django_elasticsearch_dsl_drf",
 ]
 
 LOCAL_APPS = [
@@ -51,6 +53,7 @@ LOCAL_APPS = [
     "core_apps.ratings.apps.RatingsConfig",
     "core_apps.bookmarks.apps.BookmarksConfig",
     "core_apps.responses.apps.ResponsesConfig",
+    "core_apps.search.apps.SearchConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -177,6 +180,13 @@ CELERY_TASK_SEND_SENT_EVENT = True
 
 if USE_TZ:
     CELERY_TIMEZONE = TIME_ZONE
+
+
+ELASTICSEARCH_DSL = {
+    "default": {
+        "hosts": "es:9200",
+    },
+}
 
 
 # LOGGING

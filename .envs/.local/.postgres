@@ -3,3 +3,4 @@ POSTGRES_PORT=5432
 POSTGRES_DB=medium-live
 POSTGRES_USER=vee
 POSTGRES_PASSWORD=pasting4321
+DATABASE_URL=postgres://vee:pasting4321@postgres:5432/medium-live
