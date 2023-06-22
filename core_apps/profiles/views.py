@@ -1,4 +1,3 @@
-# TODO change this in production
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from rest_framework import generics, status
@@ -8,7 +7,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from medium_clone.settings.local import DEFAULT_FROM_EMAIL
+# TODO change this in production
+from medium_clone.settings.production import DEFAULT_FROM_EMAIL
 
 from .exceptions import CantFollowYourself
 from .models import Profile
